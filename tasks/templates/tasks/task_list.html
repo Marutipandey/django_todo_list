@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Todo List</h1>
+        
+        <!-- <div class="alert alert-success" role="alert">
+            {% if completed_tasks %}
+                You have completed tasks! Total: {{ completed_count }}
+            {% else %}
+                You have no completed tasks.
+            {% endif %}
+        </div> -->
+
+        <div class="alert alert-success rounded-pill" role="alert">
+            {% if completed_tasks %}
+                You have completed tasks! Total: {{ completed_count }}
+            {% else %}
+                You have no completed tasks.
+            {% endif %}
+        </div>
+        
+        
+        <!-- <div class="alert alert-danger" role="alert">
+            {% if not_completed_tasks %}
+                You have not completed tasks! Total: {{ not_completed_count }}
+            {% else %}
+                You have completed all tasks.
+            {% endif %}
+        </div> -->
+        <div class="alert alert-danger rounded-pill" role="alert">
+            {% if not_completed_tasks %}
+                You have not completed tasks! Total: {{ not_completed_count }}
+            {% else %}
+                You have completed all tasks.
+            {% endif %}
+        </div>
+        
+
+        <ul class="list-group">
+            {% for task in tasks %}
+                <!-- <li class="list-group-item">
+                    {{ task.title }}
+                    {% if task.completed %}
+                        <span class="badge badge-success ml-2">Completed</span>
+                        <a href="{% url 'mark_not_completed' task.id %}" class="btn btn-sm btn-warning ml-2"></a>
+                    {% else %}
+                        <span class="badge badge-danger ml-2">Not Completed</span>
+                        <a href="{% url 'mark_completed' task.id %}" class="btn btn-sm btn-success ml-2"></a>
+                    {% endif %}
+                </li> -->
+                <li class="list-group-item {% if task.completed %}list-group-item-success{% else %}list-group-item-danger{% endif %}">
+                    {{ task.title }}
+                    {% if task.completed %}
+                        <!-- <span class="badge badge-success ml-2 float-right">Completed</span> -->
+                        <a href="{% url 'mark_not_completed' task.id %}" class="btn btn-sm btn-success ml-2 float-right">Mark Completed</a>
+                    {% else %}
+                        <!-- <span class="badge badge-danger ml-2 float-right">Not Completed</span> -->
+                        <a href="{% url 'mark_completed' task.id %}" class="btn btn-sm btn-danger ml-2 float-right">Mark Not Completed</a>
+                    {% endif %}
+                </li>
+                
+            {% endfor %}
+        </ul>
+        <a href="{% url 'add_task' %}" class="btn btn-primary mt-3">Add Task</a>
+    </div>
+</body>
+</html>
